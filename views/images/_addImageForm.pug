@@ -1,0 +1,23 @@
+form.form-horizontal(method='post' action='/images/add')
+  h3.col-sm-offset-2 New Pin <small> for #{user.username}</small>
+  .form-group 
+    label.col-sm-2.control-label(for='url') Image Url
+    .col-sm-10
+      input#bookName.form-control(
+          type='text'
+          name='url'
+          placeholder='http://...'
+          required)
+  .form-group
+    label.col-sm-2.control-label(for='caption') Caption
+    .col-sm-10
+      input#caption.form-control(
+          type='text'
+          name='caption'
+          
+          
+          placeholder='Describe the image...'
+          required)
+  .form-group 
+    .col-sm-offset-2.col-sm-10
+      button.btn.btn-main(type='submit') Pin Image

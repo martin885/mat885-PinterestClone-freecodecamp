@@ -1,0 +1,23 @@
+block navbar
+  nav.navbar.navbar-default
+    .container
+      .navbar-header
+        a.navbar-brand(href='/') freecodecamp
+      ul.nav.navbar-nav
+        li(class=`${active === 'users' ? 'active' : ''}`): a(href='/users') Users
+      ul.nav.navbar-nav.navbar-right
+        if user
+          li.drop
+            a(href='#') #{user.username} <span class="caret"></span>
+            ul
+              li(class=`${active === 'profile' ? 'active' : ''}`): a(href=`/users/${user.id}`) Profile
+              li(class=`${active === 'editProfile' ? 'active' : ''}`):  a(href='/users/edit') Edit Profile
+              li: a(href='/logout') Logout
+
+   
+
+        else
+          li(class=`${active === 'login' ? 'active' : '' }`): a(href='/login') Login
+
+
+      

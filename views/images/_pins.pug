@@ -1,0 +1,43 @@
+mixin likeBtn(image)
+  if user
+    if user.id !== image.owner._id.toString()
+      if image.likes.map(i => i._id.toString()).includes(user.id)
+        a.btn.btn-like(href=`/images/${image.id}/unlike`)
+          span.glyphicon.glyphicon-heart(aria-hidden='true')
+          | &nbsp;Likes #{image.likes.length}
+      else
+        a.btn.btn-like(href=`/images/${image.id}/like`)
+          span.glyphicon.glyphicon-heart-empty(aria-hidden='true')
+          | &nbsp;Likes #{image.likes.length}
+    else
+      a.btn.btn-like(title='You cant\'t like your own pin')
+        span.glyphicon.glyphicon-heart-empty(aria-hidden='true')
+        | &nbsp;Likes #{image.likes.length}
+  else
+    a.btn.btn-like(href='/login' title='Login to like')
+      span.glyphicon.glyphicon-heart-empty(aria-hidden='true')
+      | &nbsp;Likes #{image.likes.length}
+
+mixin deleteBtn(image)
+  if user && user.id === image.owner._id.toString()
+    a.btn.btn-danger.btn-delete(href=`/images/${image.id}/remove` title=`delete "${image.caption}"`) &times;
+
+.row.pins
+  each image in images
+    .col-lg-3.col-md-4.col-sm-6.col-xs-12.pin
+      .pin-container
+        .pin-image
+          a(href=`${image.url}`)
+            object(data=`${image.url}`)
+              img(src='/static/images/not-found.svg')
+        .pin-caption 
+          p.text-center #{image.caption}
+          .pin-btns
+            p
+              span.text-muted.pull-rigth
+                | by&nbsp;
+                +userLink(image.owner)
+                | &nbsp;
+                +deleteBtn(image)
+              +likeBtn(image)
+  

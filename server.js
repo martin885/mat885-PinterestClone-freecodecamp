@@ -24,7 +24,7 @@ const images=require('./controllers/images');
 
 require('./config/passport');
 
-app.set('view engine','ejs'); 
+app.set('view engine','pug'); 
  app.use(bodyParser.urlencoded({extended:true}));
  app.use(bodyParser.json());
 
