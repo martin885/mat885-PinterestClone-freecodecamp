@@ -4,12 +4,15 @@ const Schema=mongoose.Schema;
 
 
 const userSchema=new Schema({
-    fullname:{type:String},
-    email:{type:String},
+    idFacebook:{type:String},
     password:{type:String},
+    email:{type:String},
+    fullname:{type:String},
     city:{type:String},
     state:{type:String},
-    addedBooks:[]
+    images:[    {type: Schema.Types.ObjectId,
+        ref: 'Image',
+    required: true}]
 });
 
 

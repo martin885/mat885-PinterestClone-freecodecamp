@@ -1,12 +1,12 @@
 extends layout
 block content
- form.form-horizontal(method='post' action='/login')
+ form.form-horizontal(method='post' action='/signup')
   .form-group 
-    label.col-sm-2.control-label(for='name') Name:
+    label.col-sm-2.control-label(for='fullname') Name:
     .col-sm-10
       input#bookName.form-control(
           type='text'
-          name='name'
+          name='fullname'
           placeholder='Enter a name...'
           required)
   .form-group
@@ -21,7 +21,6 @@ block content
           required)
   .form-group 
     .col-sm-offset-2.col-sm-10
-      button.btn.btn-main(type='submit') Login
+      button.btn.btn-main(type='submit') Register
   .login-btns 
     a.btn.btn-lg.btn-block.btn-google(href='/auth/facebook')
-      | Sign in with facebook 

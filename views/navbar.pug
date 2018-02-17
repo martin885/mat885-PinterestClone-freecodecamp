@@ -8,7 +8,7 @@ block navbar
       ul.nav.navbar-nav.navbar-right
         if user
           li.drop
-            a(href='#') #{user.username} <span class="caret"></span>
+            a(href='#') #{user.fullname} <span class="caret"></span>
             ul
               li(class=`${active === 'profile' ? 'active' : ''}`): a(href=`/users/${user.id}`) Profile
               li(class=`${active === 'editProfile' ? 'active' : ''}`):  a(href='/users/edit') Edit Profile
@@ -17,6 +17,7 @@ block navbar
    
 
         else
+          li(class=`${active === 'login' ? 'active' : '' }`): a(href='/signup') Register
           li(class=`${active === 'login' ? 'active' : '' }`): a(href='/login') Login
 
 

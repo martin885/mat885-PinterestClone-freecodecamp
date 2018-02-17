@@ -1,12 +1,12 @@
 form.form-horizontal(method='post' action='/images/add')
-  h3.col-sm-offset-2 New Pin <small> for #{user.username}</small>
+  h3.col-sm-offset-2 New Pin <small> for #{user.fullname}</small>
   .form-group 
     label.col-sm-2.control-label(for='url') Image Url
     .col-sm-10
       input#bookName.form-control(
           type='text'
           name='url'
-          placeholder='http://...'
+          placeholder='Enter an url for the image...'
           required)
   .form-group
     label.col-sm-2.control-label(for='caption') Caption

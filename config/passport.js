@@ -1,5 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy=require('passport-facebook').Strategy;
 
 
 
@@ -24,11 +25,11 @@ passport.deserializeUser(function (id, done) {
 
 
 passport.use('local.signup', new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'fullname',
     passwordField: 'password',
     passReqToCallback: true
-}, function (req, email, password, done) {
-    User.findOne({ 'email': email }, function (err, user) {
+}, function (req, fullname, password, done) {
+    User.findOne({ 'fullname': fullname }, function (err, user) {
 
 
 
@@ -40,8 +41,7 @@ passport.use('local.signup', new LocalStrategy({
             return done(null, false);
         }
         var newUser = new User();
-        newUser.fullname = req.body.name;
-        newUser.email = req.body.email;
+        newUser.fullname = req.body.fullname;
         newUser.password = newUser.encryptPassword(req.body.password);
 
         newUser.save(function (err) {
@@ -85,4 +85,39 @@ passport.use('local.login', new LocalStrategy({
         }
         return done(null, user);
     })
+}));
+
+passport.use(new FacebookStrategy({
+
+    clientID: process.env.CLIENTID,
+    clientSecret: process.env.CLIENTSECRET,
+    callbackURL: process.env.CLIENTURL,
+    profileFields: ['id', 'displayName', 'email']
+
+}, function (accessToken, refreshToken, profile, done) {
+
+    User.findOne({ idFacebook: profile.id }, function (err, user) {
+        if (err) {
+            done(err);
+        }
+        if (user && user !== null) {
+            return done(null, user);
+        }
+        else {
+            var newUser = new User()
+
+            newUser.idFacebook = profile.id;
+            newUser.fullname = profile.displayName;
+            newUser.email = profile.emails[0].value;
+            newUser.save(function (err) {
+
+                if (err) {
+
+                    return console.log(err);
+                }
+
+                return done(null, newUser);
+            });
+        }
+    });
 }));
