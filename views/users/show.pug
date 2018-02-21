@@ -1,0 +1,20 @@
+extends ../layout 
+block content
+  form.form-horizontal
+    .form.group 
+      h3.col-sm-offset-2 #{showUser.fullname}'s <small> profile </small>
+    .form-group
+      label.col-sm-2.control-label Username:
+      .col-sm-10
+        p.form-control-static #{showUser.fullname}
+    .form-group
+      label.col-sm-2.control-label City:
+      .col-sm-10
+        p.form-control-static #{showUser.city}
+    .form-group
+      ul.nav.nav-pills.col-sm-offset-2
+        li: a.btn.btn-default(href=`/users/${showUser.id}/pins`) #{showUser.fullname}'s Pins
+        
+        
+        if (user || {}).id === showUser.id
+          li: a.btn.btn-default(href='/users/edit') Edit Profile

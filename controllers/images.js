@@ -50,11 +50,36 @@ router.get('/:id/like', isLoggedIn, function (req, res) {
 router.get('/:id/unlike', isLoggedIn, function (req, res) {
     Image.findByIdAndUpdate(req.params.id, { $pull: { likes: req.user._id } }, function () {
         req.flash('info', { success: 'Image unliked' });
-        console.log(req.get('Referer'));
         return res.redirect(req.get('Referer'));
     });
 });
 
+
+
+
+
+
+router.get('/:id/remove', isLoggedIn, function (req, res) {
+    Image.findById(req.params.id, function (err, image) {
+        if (err) {
+            return console.log(err);
+        }
+        if (image.owner.toString() !== req.user.id) {
+            req.flash('info', { danger: 'You cant delete this image' });
+            return console.log('You cant delete this image');
+        }
+        return image.remove().then(function () {
+            User.update({ _id: image.owner }, { $pull: { images: image._id } }, function (err) {
+                if (err) {
+                    req.flash('info', { danger: 'An error has occurred' });
+                    return res.redirect(req.get('Referer'));
+                }
+                req.flash('info', { success: 'Image removed' });
+                return res.redirect(req.get('Referer'));
+            });
+        });
+    });
+});
 
 module.exports = router;
 

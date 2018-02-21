@@ -1,0 +1,7 @@
+extends ../layout
+block content 
+  if isShowUser
+    include ../images/_addImageForm 
+  h2.text-center #{title}
+  - const images=showUser.images.reverse()
+  include ../images/_pins  

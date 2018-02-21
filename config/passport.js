@@ -25,12 +25,11 @@ passport.deserializeUser(function (id, done) {
 
 
 passport.use('local.signup', new LocalStrategy({
-    usernameField: 'fullname',
+    usernameField:'email',
     passwordField: 'password',
     passReqToCallback: true
-}, function (req, fullname, password, done) {
-    User.findOne({ 'fullname': fullname }, function (err, user) {
-
+}, function (req,email, password, done) {
+    User.findOne({ 'email': email }, function (err, user) {
 
 
         if (err) {
@@ -42,6 +41,7 @@ passport.use('local.signup', new LocalStrategy({
         }
         var newUser = new User();
         newUser.fullname = req.body.fullname;
+        newUser.email=req.body.email;
         newUser.password = newUser.encryptPassword(req.body.password);
 
         newUser.save(function (err) {
@@ -63,12 +63,11 @@ passport.use('local.signup', new LocalStrategy({
 
 
 passport.use('local.login', new LocalStrategy({
-    usernameField: 'email',
+    usernameField:'email',
     passwordField: 'password',
     passReqToCallback: true
-}, function (req, email, password, done) {
+}, function (req,email, password, done) {
     User.findOne({ 'email': email }, function (err, user) {
-
 
 
         if (err) {

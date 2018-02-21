@@ -21,9 +21,11 @@ mongoose.connect(process.env.MONGOURI||'mongodb://localhost/pinterest');
 
 const user=require('./controllers/user');
 const images=require('./controllers/images');
+const users=require('./controllers/users');
 
 require('./config/passport');
 
+app.use('/static',express.static(path.join(__dirname,'public')));
 app.set('view engine','pug'); 
  app.use(bodyParser.urlencoded({extended:true}));
  app.use(bodyParser.json());
@@ -43,8 +45,12 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+
 app.use(user);
 app.use('/images',images);
+app.use('/users',users);
 
 
 app.listen(port,function(){

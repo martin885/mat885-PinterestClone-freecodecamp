@@ -2,12 +2,20 @@ extends layout
 block content
  form.form-horizontal(method='post' action='/login')
   .form-group 
-    label.col-sm-2.control-label(for='name') Name:
+    label.col-sm-2.control-label(for='fullname') Name:
     .col-sm-10
       input#bookName.form-control(
           type='text'
-          name='name'
+          name='fullname'
           placeholder='Enter a name...'
+          required)
+  .form-group 
+    label.col-sm-2.control-label(for='email') Email:
+    .col-sm-10
+      input#bookName.form-control(
+          type='text'
+          name='email'
+          placeholder='Enter an email...'
           required)
   .form-group
     label.col-sm-2.control-label(for='password') Password:

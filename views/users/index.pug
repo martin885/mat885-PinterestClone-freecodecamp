@@ -1,0 +1,9 @@
+extends ../layout
+block content 
+  h1 Users
+  ul.list-group
+    each user in users
+      li.list-group-item
+        h4.list-group-item-heading: a(href=`/users/${user.id}/pins`) #{user.fullname}
+        p.list-group-item-text= `City:${user.city || ''}`
+        p.list-group-item-text

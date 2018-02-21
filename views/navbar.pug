@@ -11,7 +11,7 @@ block navbar
             a(href='#') #{user.fullname} <span class="caret"></span>
             ul
               li(class=`${active === 'profile' ? 'active' : ''}`): a(href=`/users/${user.id}`) Profile
-              li(class=`${active === 'editProfile' ? 'active' : ''}`):  a(href='/users/edit') Edit Profile
+              li(class=`${active === 'editprofile' ? 'active' : ''}`):  a(href='/users/edit') Edit Profile
               li: a(href='/logout') Logout
 
    

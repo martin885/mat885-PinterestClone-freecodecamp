@@ -6,8 +6,8 @@ const Schema=mongoose.Schema;
 const userSchema=new Schema({
     idFacebook:{type:String},
     password:{type:String},
-    email:{type:String},
-    fullname:{type:String},
+    email:{type:String,required:true},
+    fullname:{type:String,required:true},
     city:{type:String},
     state:{type:String},
     images:[    {type: Schema.Types.ObjectId,
@@ -31,4 +31,4 @@ userSchema.methods.validPassword=function(password){
 
 const User=mongoose.model('User',userSchema);
 
-module.exports= User;
+module.exports= User; 

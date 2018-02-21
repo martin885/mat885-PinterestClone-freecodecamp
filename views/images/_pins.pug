@@ -22,22 +22,18 @@ mixin deleteBtn(image)
   if user && user.id === image.owner._id.toString()
     a.btn.btn-danger.btn-delete(href=`/images/${image.id}/remove` title=`delete "${image.caption}"`) &times;
 
-.row.pins
+.grid
   each image in images
-    .col-lg-3.col-md-4.col-sm-6.col-xs-12.pin
-      .pin-container
-        .pin-image
+    .grid-item
           a(href=`${image.url}`)
             object(data=`${image.url}`)
-              img(src='/static/images/not-found.svg')
-        .pin-caption 
+              img(src='/static/images/not-found.jpg') 
           p.text-center #{image.caption}
-          .pin-btns
             p
               span.text-muted.pull-rigth
                 | by&nbsp;
                 +userLink(image.owner)
                 | &nbsp;
+                +likeBtn(image)
                 +deleteBtn(image)
-              +likeBtn(image)
-  
+script(src='/static/js/jquery.js') 

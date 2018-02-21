@@ -9,18 +9,25 @@ block content
           name='fullname'
           placeholder='Enter a name...'
           required)
+  .form-group 
+    label.col-sm-2.control-label(for='email') Email:
+    .col-sm-10
+      input#bookName.form-control(
+          type='text'
+          
+          
+          name='email'
+          placeholder='Enter an email...'
+          required)
   .form-group
     label.col-sm-2.control-label(for='password') Password:
     .col-sm-10
       input#caption.form-control(
           type='text'
-          name='password'
-          
-          
+          name='password'  
           placeholder='Enter a password...'
           required)
   .form-group 
     .col-sm-offset-2.col-sm-10
       button.btn.btn-main(type='submit') Register
-  .login-btns 
-    a.btn.btn-lg.btn-block.btn-google(href='/auth/facebook')
+

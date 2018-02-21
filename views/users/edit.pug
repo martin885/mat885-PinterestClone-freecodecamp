@@ -1,0 +1,24 @@
+extends ../layout 
+block content
+  form.form-horizontal(method='post' action='/users/update')
+    .form-group
+      h3.col-sm-offset-2 Update Profile <small> for #{user.fullname} </small>
+    .form-group
+      label.col-sm-2.control-label(for='fullname') Username:
+      .col-sm-10
+        input#fullname.form-control(
+            name='fullname'
+            value=`${user.fullname}`
+            placeholder='Enter a name...'
+            type='text'
+            required)
+    .form-group
+      label.col-sm-2.control-label(for='city') City:
+      
+      
+      .col-sm-10
+        input#city.form-control(name='city' value=`${user.city || ''}` placeholder='Enter a city...' type='text')
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-default(type='submit') Done
+        
